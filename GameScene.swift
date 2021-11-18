@@ -8,6 +8,8 @@
 import SpriteKit
 import GameplayKit
 
+let player = SKSpriteNode(imageNamed: "player-rocket")
+
 class GameScene: SKScene {
     var background = SKSpriteNode()
     var particles = SKEmitterNode()
@@ -21,14 +23,18 @@ class GameScene: SKScene {
         // The edge length values were determined so that the image could cover the entire screen.
         background.size = CGSize(width: 2360, height: 1640)
         // The depth of the background on the game screen is set to 1.
-        background.zPosition = 0
+        background.zPosition = -1
         self.addChild(background)
         
         if let particles = SKEmitterNode(fileNamed: "FlyningEffect") {
             // By synchronizing the Particle and Background positions, I wanted to ensure that these two objects were aligned on the screen.
-            particles.position = background.position
-            particles.zPosition = 1
+            particles.position.x = 512
+            particles.zPosition = 0
             addChild(particles)
+            
+            player.position.x = -400
+            player.zPosition = 1
+            addChild(player)
             
         }
     }
